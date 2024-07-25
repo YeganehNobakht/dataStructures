@@ -41,7 +41,7 @@ public class SearchAlgorithms {
 
 
     public static int ternarySearch(int[] array, int target) {
-        ternarySearch(array, target, 0, array.length - 1);
+        return  ternarySearch(array, target, 0, array.length - 1);
     }
 
     public static int ternarySearch(int[] array, int target, int left, int right) {
@@ -63,5 +63,22 @@ public class SearchAlgorithms {
             return ternarySearch(array, target, mid2, right);
 
         return ternarySearch(array, target, mid1 + 1, mid2 - 1);
+    }
+
+
+    public static int jumpSearch(int[] array, int target){
+        int blockSize = (int) Math.sqrt(array.length);
+        int start = 0, next = blockSize;
+
+        while (array[next - 1] < target && start < array.length){
+            start = next;
+            next = start + blockSize;
+            if (next >array.length)
+                next = array.length;
+        }
+        for (int i = 0; i<next ; i++)
+            if (array[i] == target)
+                return i;
+        return -1;
     }
 }
