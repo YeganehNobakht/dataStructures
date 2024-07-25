@@ -41,7 +41,7 @@ public class SearchAlgorithms {
 
 
     public static int ternarySearch(int[] array, int target) {
-        return  ternarySearch(array, target, 0, array.length - 1);
+        return ternarySearch(array, target, 0, array.length - 1);
     }
 
     public static int ternarySearch(int[] array, int target, int left, int right) {
@@ -66,19 +66,30 @@ public class SearchAlgorithms {
     }
 
 
-    public static int jumpSearch(int[] array, int target){
+    public static int jumpSearch(int[] array, int target) {
         int blockSize = (int) Math.sqrt(array.length);
         int start = 0, next = blockSize;
 
-        while (array[next - 1] < target && start < array.length){
+        while (array[next - 1] < target && start < array.length) {
             start = next;
             next = start + blockSize;
-            if (next >array.length)
+            if (next > array.length)
                 next = array.length;
         }
-        for (int i = 0; i<next ; i++)
+        for (int i = 0; i < next; i++)
             if (array[i] == target)
                 return i;
         return -1;
+    }
+
+    public static int exponentialSearch(int[] array, int target) {
+        int bound = 1;
+        while (array[bound] < target && bound < array.length) {
+
+            bound *= 2;
+        }
+        int left = bound/2;
+        int right = Math.min(bound, array.length - 1);
+        return binarySearchRec(array, target, left, right);
     }
 }
